@@ -16,30 +16,44 @@ class Agenda{
     //1. Adicionar novo contato com informações como nome, telefone, e-mail, etc.
     agendar(contato){
         this.agenda.push(contato)
-    }
+    } 
     //2. Visualizar a lista de contatos cadastrados de forma organizada
     visualizar(){
         this.agenda.forEach(contato => {
-            return console.log(`ID: ${contato.id} \nNome: ${contato.nome}\nTelefone: ${contato.telefone} \nEmail: ${contato.email} \n`)
+            return console.log(`
+            ----------------------------------- \n
+            ID: ${contato.id} \n
+            Nome: ${contato.nome}\n
+            Telefone: ${contato.telefone} \n
+            Email: ${contato.email} \n
+            ----------------------------------- \n`)
         });
     }
     //3. Editar os detalhes de um contato existente
     editar(contato){
-        let resposta = Number(prompt('O que você deseja editar? \n 0 - Tudo \n 1 - Nome \n 2- Telefone \n 3 - Email \n'))
+        console.log('-----------------------------------')
+        console.log('0 - Tudo')
+        console.log('1 - Nome')
+        console.log('2 - Email')
+        console.log('3 - Telefone')
+        console.log('O que você deseja editar?')
+        console.log('-----------------------------------')
+        let resposta = Number(prompt(': '))
         if (resposta === 0){
-            contato.nome = prompt(`Digite o novo nome: `)
-            contato.telefone = prompt(`Digite o novo telefone: `)
-            contato.email = prompt(`Digite o novo email: `)
+            this.agenda[contato].nome = prompt(`Digite o novo nome: `)
+            this.agenda[contato].telefone = prompt(`Digite o novo telefone: `)
+            this.agenda[contato].email = prompt(`Digite o novo email: `)
         } else if (resposta === 1){            
-            contato.nome = prompt(`Digite o novo nome: `)
+            this.agenda[contato].nome = prompt(`Digite o novo nome: `)
         } else if (resposta === 2){            
-            contato.telefone = prompt(`Digite o novo telefone: `)
+            this.agenda[contato].telefone = prompt(`Digite o novo telefone: `)
         } else if (resposta === 3){            
-            contato.email = prompt(`Digite o novo email: `)
+            this.agenda[contato].email = prompt(`Digite o novo email: `)
         } else{
             return console.log('Digite um número válido')
         }
-        return console.log('Editado com sucesso')
+        console.log('Editado com sucesso')
+        prompt('Digite qualquer coisa para continuar: ')
     }
     //4. Excluir um contato da lista
     deletar(contato){
@@ -55,7 +69,15 @@ let agenda = new Agenda;
 let resposta = -1
 let id = 0
 while(resposta !== 0) {
-    resposta = Number(prompt('0 - Sair do Programa \n1 - Criar Contato \n2 - Visualizar Agenda \n3 - Editar Contato \n4 - Deletar Contato \n5 - Pesquisar por Contato \n'))
+    console.log('-----------------------------------')
+    console.log('0 - Sair do Programa')
+    console.log('1 - Criar Contato')
+    console.log('2 - Visualizar Agenda')
+    console.log('3 - Editar Contatos')
+    console.log('4 - Deletar Contato')
+    console.log('5 - Pesquisar por nome')
+    console.log('-----------------------------------')
+    resposta = Number(prompt(': '))
     if (resposta === 1) {
         let nome = prompt('Digite o nome: ')
         let telefone = prompt('Digite o telefone: ')
@@ -63,13 +85,22 @@ while(resposta !== 0) {
         let contato = new Contato(nome, telefone, email)
     } else if (resposta === 2){
         agenda.visualizar()
+        prompt('Digite qualquer coisa para continuar: ')
     } else if (resposta === 3){
         agenda.visualizar()
         let resposta = Number(prompt('Digite o ID do contato que deseja editar: '))
-        agenda.editar(Contato[resposta])
+        agenda.editar(resposta)
     }   else if (resposta === 4){
         agenda.visualizar()
-        let resposta = Number(prompt('Digite o ID do contato que deseja deletar: '))
-        agenda.deletar(Contato[resposta])
+        let resposta = Number(prompt('Digite o ID do agenda que deseja deletar: '))
+        agenda.deletar(resposta)
+    } else if(resposta === 5){
+        let resposta = prompt(`Qual nome deseja procurar na agenda?`)
+        agenda.pesquisarNome(resposta)
+    } else if (resposta === 0){
+        console.log('Até a proxima!')
+    } else {
+        console.log('Digite uma opção válida')
     }
-}
+    }
+    
