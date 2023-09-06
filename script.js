@@ -1,4 +1,5 @@
 const prompt = require ('prompt-sync') ({sigint: true});
+let id = 0
 class Contato{
     constructor(nome, telefone, email){
         this.id = id
@@ -57,7 +58,7 @@ class Agenda{
     }
     //4. Excluir um contato da lista
     deletar(contato){
-        this.agenda.splice(this.agenda.indexOf(contato), 1);
+        this.agenda.splice(contato, 1);
     }
     //5. Pesquisar contatos por nome
     pesquisarNome(nome){
@@ -67,7 +68,7 @@ class Agenda{
 // --------------------------------------------------------------
 let agenda = new Agenda;
 let resposta = -1
-let id = 0
+
 while(resposta !== 0) {
     console.log('-----------------------------------')
     console.log('0 - Sair do Programa')
